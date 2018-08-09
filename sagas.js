@@ -1,15 +1,22 @@
 import { delay } from 'redux-saga'
-import {put, takeEvery } from 'redux-saga/effects'
+import {put, takeEvery, all } from 'redux-saga/effects'
 
-export function* helloSaga() {
+function* helloSaga() {
   console.log('Hello Sagas!')
 }
 
-export function* incrementAsynch() {
+function* incrementAsynch() {
   yeild delay(1000)
   yeild put({type: 'INCREMENT'})
 }
 
-export function* watchIncrementAsynch() {
+function* watchIncrementAsynch() {
   yeild takeEvery('INCREMENT_ASYNCH', incremmentAsynch)
+}
+
+export default function* rootSaga() {
+  yeild all([
+    helloSaga(),
+    watchIncrementAsynch()
+  ])
 }
