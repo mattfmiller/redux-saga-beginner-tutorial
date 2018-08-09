@@ -6,16 +6,16 @@ function* helloSaga() {
 }
 
 function* incrementAsynch() {
-  yeild delay(1000)
-  yeild put({type: 'INCREMENT'})
+  yield delay(1000)
+  yield put({type: 'INCREMENT'})
 }
 
 function* watchIncrementAsynch() {
-  yeild takeEvery('INCREMENT_ASYNCH', incremmentAsynch)
+  yield takeEvery('INCREMENT_ASYNCH', incremmentAsynch)
 }
 
 export default function* rootSaga() {
-  yeild all([
+  yield all([
     helloSaga(),
     watchIncrementAsynch()
   ])
